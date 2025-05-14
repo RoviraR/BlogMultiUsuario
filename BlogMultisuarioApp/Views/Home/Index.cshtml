@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid p-0">
+    <section class="hero-section text-white text-center"
+             style="background: url('https://via.placeholder.com/1500x1000/000000/ffffff?text=Fondo+Personalizado') no-repeat center center fixed; background-size: cover;">
+        <div class="overlay" style="background-color: rgba(41, 95, 242, 0.7); padding: 100px 20px;">
+            <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Bienvenido a Blog Multisuario</h1>
+            <p class="lead fs-4 mb-4 animate__animated animate__fadeInUp">Crea, descubre y comparte artículos con el mundo</p>
+            <a asp-action="AllUserArticles" asp-controller="Articulos" class="btn btn-light btn-lg fw-bold shadow animate__animated animate__zoomIn">
+                <i class="bi bi-plus-circle me-2"></i>Comienza a crear
+            </a>
+        </div>
+    </section>
+</div>
+
+<section class="container text-center my-5">
+    <h2 class="mb-4 text-primary animate__animated animate__fadeIn">¿Qué puedes hacer aquí?</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 animate__animated animate__fadeInLeft animate__delay-1s">
+                <div class="card-body">
+                    <h3 class="fw-bold text-success"><i class="bi bi-pencil-square me-2"></i>Crear artículos</h3>
+                    <p class="text-muted">Escribe de forma sencilla y comparte tus ideas con la comunidad.</p>
+                    <a asp-action="Create" asp-controller="Articulos" class="btn btn-outline-success">Crear artículo</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg border-0 rounded-4 h-100 animate__animated animate__fadeInRight animate__delay-1s">
+                <div class="card-body">
+                    <h3 class="fw-bold text-info"><i class="bi bi-book me-2"></i>Leer artículos</h3>
+                    <p class="text-muted">Explora contenido interesante creado por otros usuarios.</p>
+                    <a asp-action="Index" asp-controller="Articulos" class="btn btn-outline-info">Ver artículos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light py-5 text-center">
+    <div class="container">
+        <h2 class="mb-5 text-primary animate__animated animate__fadeIn">Lo que dicen nuestros usuarios</h2>
+
+        <div id="testimoniosCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="card shadow-sm border-0 rounded-4 w-75 mb-3 animate__animated animate__fadeIn">
+                            <div class="card-body">
+                                <p class="fst-italic">"¡Es muy fácil crear artículos y compartirlos con otros! Me encanta esta plataforma."</p>
+                                <footer class="blockquote-footer fw-bold">Carlos M.</footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="card shadow-sm border-0 rounded-4 w-75 mb-3">
+                            <div class="card-body">
+                                <p class="fst-italic">"Una excelente manera de encontrar contenido interesante y aprender de otros."</p>
+                                <footer class="blockquote-footer fw-bold">Laura P.</footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="card shadow-sm border-0 rounded-4 w-75 mb-3">
+                            <div class="card-body">
+                                <p class="fst-italic">"Me encanta lo fácil que es navegar por la plataforma y la calidad de los artículos."</p>
+                                <footer class="blockquote-footer fw-bold">Juan A.</footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="card shadow-sm border-0 rounded-4 w-75 mb-3">
+                            <div class="card-body">
+                                <p class="fst-italic">"La comunidad es muy activa y siempre encuentro temas interesantes para leer."</p>
+                                <footer class="blockquote-footer fw-bold">Ana G.</footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="card shadow-sm border-0 rounded-4 w-75 mb-3">
+                            <div class="card-body">
+                                <p class="fst-italic">"Publicar mi primer artículo fue muy fácil, y recibí buenos comentarios."</p>
+                                <footer class="blockquote-footer fw-bold">Luis F.</footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<section class="text-center my-5">
+    <h2 class="text-primary mb-3"><i class="bi bi-rocket-takeoff me-2"></i>¡Comienza a crear ahora!</h2>
+    <p class="lead">Es momento de compartir tus ideas con el mundo.</p>
+    <a href="/Articulos/Create" class="btn btn-primary btn-lg fw-bold shadow">
+        <i class="bi bi-file-earmark-plus me-1"></i> Crear mi artículo
+    </a>
+    <p class="mt-3">¿Nuevo aquí? <a href="/Account/Register" class="text-primary fw-semibold">Regístrate gratis</a></p>
+</section>

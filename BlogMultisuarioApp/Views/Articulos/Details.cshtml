@@ -1,0 +1,88 @@
+﻿@model BlogMultisuarioApp.Models.Articulo
+
+@{
+    ViewData["Title"] = "Detalles del Artículo";
+    string returnAction = ViewBag.ReturnTo ?? "Index";
+    string bucketUrl = "https://blogmultisuariobucket.s3.amazonaws.com/";
+    string defaultImage = "https://media.istockphoto.com/id/1409329028/es/vector/no-hay-imagen-disponible-marcador-de-posici%C3%B3n-miniatura-icono-dise%C3%B1o-de-ilustraci%C3%B3n.jpg?s=612x612&w=0&k=20&c=Bd89b8CBr-IXx9mBbTidc-wu_gtIj8Py_EMr3hGGaPw=";
+    var imageUrl = string.IsNullOrEmpty(Model.ImagenNombre) ? defaultImage : $"{bucketUrl}{Model.ImagenNombre}";
+}
+
+<style>
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-size: 2rem;
+    }
+
+    .card-body p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .card-body .btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .card-body img {
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card-body .bi {
+        font-size: 1.1rem;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">
+        <i class="bi bi-file-earmark-text text-primary"></i> Detalles del Artículo
+    </h2>
+
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-body">
+            <div class="mb-4">
+                <img src="@imageUrl" alt="Imagen del Artículo" class="img-fluid rounded-3 shadow-sm" style="max-height: 400px; object-fit: cover; width: 100%;">
+            </div>
+
+            <h4 class="card-title fw-bold text-primary mb-3">@Model.Titulo</h4>
+
+            <div class="d-flex justify-content-between text-muted mb-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle me-2"></i>
+                    <span class="fw-bold">@Model.Autor</span>
+                </div>
+                <div>
+                    <i class="bi bi-calendar"></i>
+                    <span>@DateTime.Parse(Model.FechaCreacion).ToString("dd MMM yyyy HH:mm")</span>
+                </div>
+            </div>
+
+            <div>
+                <h5 class="fw-bold text-dark">Contenido:</h5>
+                <p class="text-muted mb-4">@Model.Contenido</p>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-between mt-4">
+                <a asp-action="@returnAction" class="btn btn-outline-secondary d-flex align-items-center">
+                    <i class="bi bi-arrow-left-circle me-2"></i> Volver a la lista
+                </a>
+
+                @if (Model.Estado == BlogMultisuarioApp.Models.Estado.Borrador)
+                {
+                    <form asp-action="Publicar" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="articuloId" value="@Model.ArticuloId" />
+                        <button type="submit" class="btn btn-outline-success d-flex align-items-center">
+                            <i class="bi bi-upload me-2"></i> Publicar
+                        </button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>

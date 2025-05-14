@@ -9,8 +9,17 @@ namespace BlogMultisuarioApp.Controllers
     {
         public IActionResult Login()
         {
-            return Challenge(new AuthenticationProperties { RedirectUri = "/Articulos/Index" },
-                OpenIdConnectDefaults.AuthenticationScheme);
+            var clientId = "6nej8qanjv13q0kobf3glnr9d2"; // tu Client ID
+            var redirectUri = "https://tajama03-env.eba-3se5iiix.us-east-1.elasticbeanstalk.com/signin-oidc"; // esta URI debe coincidir con la configurada en Cognito
+            var domain = "us-east-1vtFErItEI.auth.us-east-1.amazoncognito.com"; // tu dominio de Cognito
+        
+            var loginUrl = $"https://{domain}/login?" +
+                           $"client_id={clientId}&" +
+                           $"response_type=code&" +
+                           $"scope=openid+email+phone+profile&" +
+                           $"redirect_uri={Uri.EscapeDataString(redirectUri)}";
+        
+            return Redirect(loginUrl);
         }
 
         public async Task<IActionResult> Logout()

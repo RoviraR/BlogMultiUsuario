@@ -7,7 +7,7 @@ using Amazon.S3;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar servicios de autenticaciÛn
+// Configurar servicios de autenticaci√≥n
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -23,13 +23,13 @@ builder.Services.AddAuthentication(options =>
     options.SaveTokens = true;
     options.MapInboundClaims = false;
     options.Scope.Add("openid");   // Alcance obligatorio
-    options.Scope.Add("email");    // Alcance para correo electrÛnico
-    options.Scope.Add("phone");    // Alcance para n˙mero de telÈfono
-    options.Scope.Add("profile");  // Alcance para informaciÛn del perfil
+    options.Scope.Add("email");    // Alcance para correo electr√≥nico
+    options.Scope.Add("phone");    // Alcance para n√∫mero de tel√©fono
+    options.Scope.Add("profile");  // Alcance para informaci√≥n del perfil
 
     options.CallbackPath = "/signin-oidc";
-    options.SignedOutCallbackPath = "/signout-callback-oidc";  // Esta es la URL a la que Cognito redirigir· despuÈs de logout
-                                                               //options.PostLogoutRedirectUri = "https://localhost:7084/Home/Index"; // Ajusta esta URL seg˙n tu aplicaciÛn
+    options.SignedOutCallbackPath = "/signout-callback-oidc";  // Esta es la URL a la que Cognito redirigir√° despu√©s de logout
+                                                               //options.PostLogoutRedirectUri = "https://localhost:7084/Home/Index"; // Ajusta esta URL seg√∫n tu aplicaci√≥n
     options.SignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 
@@ -41,6 +41,14 @@ builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de sesi√≥n
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -56,7 +64,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
